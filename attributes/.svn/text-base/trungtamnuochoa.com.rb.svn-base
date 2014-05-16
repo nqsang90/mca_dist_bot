@@ -1,0 +1,13 @@
+default['mca_dist_bot']['trungtamnuochoa.com']['provider_id'] = 93
+default['mca_dist_bot']['trungtamnuochoa.com']['version'] = '0.0.1'
+default['mca_dist_bot']['trungtamnuochoa.com']['package'] = 'mca/inventory/ttnuochoa'
+default['mca_dist_bot']['trungtamnuochoa.com']['check_deploy'] = "ttnuochoa-#{node['mca_dist_bot']['trungtamnuochoa.com']['version']}.jar"
+default['mca_dist_bot']['trungtamnuochoa.com']['web_url'] = 'http://trungtamnuochoa.com'
+default['mca_dist_bot']['trungtamnuochoa.com']['crawl_url'] = 'http://trungtamnuochoa.com'
+default['mca_dist_bot']['trungtamnuochoa.com']['ewallet'] = 'trungtamnuochoa_mca'
+default['mca_dist_bot']['trungtamnuochoa.com']['msin_prefix'] = 'TTNH-'
+default['mca_dist_bot']['trungtamnuochoa.com']['item_hide_missing'] = 'true'
+default['mca_dist_bot']['trungtamnuochoa.com']['discount'] = 10
+default['mca_dist_bot']['trungtamnuochoa.com']['cron']['hour'] = "11,23"
+default['mca_dist_bot']['trungtamnuochoa.com']['cron']['minute'] = "0"
+default['mca_dist_bot']['trungtamnuochoa.com']['min_sku_number'] = 200

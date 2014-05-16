@@ -1,0 +1,13 @@
+default['mca_dist_bot']['chanthanhthuy']['provider_id'] = 111
+default['mca_dist_bot']['chanthanhthuy']['version'] = '0.0.1'
+default['mca_dist_bot']['chanthanhthuy']['package'] = 'mca/inventory/chanrathanhthuy'
+default['mca_dist_bot']['chanthanhthuy']['check_deploy'] = "chanrathanhthuy-#{node['mca_dist_bot']['chanthanhthuy']['version']}.jar"
+default['mca_dist_bot']['chanthanhthuy']['crawl_url'] = 'http://chanrathanhthuy.com'
+default['mca_dist_bot']['chanthanhthuy']['ewallet'] = 'chanrathanhthuy_mca'
+default['mca_dist_bot']['chanthanhthuy']['msin_prefix'] = 'CRTT-'
+default['mca_dist_bot']['chanthanhthuy']['item_hide_missing'] = 'true'
+default['mca_dist_bot']['chanthanhthuy']['item_validate_sku'] = 'true'
+default['mca_dist_bot']['chanthanhthuy']['discount'] = 30
+default['mca_dist_bot']['chanthanhthuy']['cron']['hour'] = "9,21"
+default['mca_dist_bot']['chanthanhthuy']['cron']['minute'] = "0"
+default['mca_dist_bot']['chanthanhthuy']['min_sku_number'] = 20

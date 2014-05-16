@@ -1,0 +1,9 @@
+#!/bin/sh
+PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/sbin:$PATH
+
+PRM_DIR=<%=@bot_dir%>
+
+cd $PRM_DIR
+#export HADOOP_CLASSPATH=$HADOOP_CLASSPATH:$PRM_DIR/libs/*
+java -cp "libs/*" vn.mobivi.inventory.crawler.controller.RemoteConsole "connect <%=@crawler_name%> <%=@crawler_ip%> <%=@crawler_port%>" "create <%=@bot_name%>"
+

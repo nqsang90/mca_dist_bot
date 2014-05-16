@@ -1,0 +1,22 @@
+<system-context version="1.0">
+  <name><%=@name%></name>
+  <channel><%=@channel%></channel>
+  <storage-config>
+    <root-path><%=@storage_path%></root-path>
+    <properties>
+      <property name="hbase.master"><%=@hbase_master%></property>
+      <property name="hbase.zookeeper.quorum"><%=@zookeeper_quorum%></property>
+      <property name="hbase.zookeeper.property.clientPort"><%=@zookeeper_port%></property>
+    </properties>
+  </storage-config>
+  <system-config>
+    <name><%=@node_type%></name>
+    <hostname><%=node['fqdn']%></hostname>
+    <port><%=@port%></port>
+  </system-config>
+  <properties>
+    <property name="node.remote.class"><%=@class%></property>
+    <property name="node.remote.num-actors"><%=@num_actors%></property>
+    <property name="node.remote.max-routes"><%=@max_routes%></property>
+  </properties>
+</system-context>

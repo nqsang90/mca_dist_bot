@@ -1,0 +1,7 @@
+
+
+default['mca_dist_bot']['core']['package'] = 'mca/inventory/mobivi-inventory-crawler'
+default['mca_dist_bot']['core']['version'] = '0.0.4-r1'
+default['mca_dist_bot']['core']['checksum'] = 'c2f35c271e5ffb07cbc528d3955aa85a4b0abc60594ac27f7a64ed02212c92f1'
+default['mca_dist_bot']['core']['check_deployed'] = "libs/mobivi-inventory-crawler-#{node['mca_dist_bot']['core']['version']}.jar"
+

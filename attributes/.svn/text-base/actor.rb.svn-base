@@ -1,0 +1,24 @@
+
+# this will becomes hdfs://host:port/{data_path} in config file
+default['mca_dist_bot']['hdfs']['data_path'] = 'mnt/inventory/crawler'
+default['mca_dist_bot']['actors']['parsers'] = {}
+default['mca_dist_bot']['actors']['writers'] = {}
+default['mca_dist_bot']['actors']['downloaders'] = {}
+default['mca_dist_bot']['actors']['crawlers'] = {}
+
+
+=begin
+# example definitions
+default['mca_dist_bot']['actors']['parsers'] = {
+		'parserA' => {'port' => 5000, 'num_actors' => 1, 'max_routes' => 20}
+	}
+default['mca_dist_bot']['actors']['writers'] = {
+		'writerA' => {'port' => 6000, 'num_actors' => 1, 'max_routes' => 20}
+	}
+default['mca_dist_bot']['actors']['downloaders'] = {
+		'downloaderA' => {'port' => 7000, 'num_actors' => 1, 'max_routes' => 20}
+	}
+default['mca_dist_bot']['actors']['crawlers'] = {
+		'crawlerA' => {'port' => 8000, 'bots' => %w{uma.vn}}
+	}
+=end

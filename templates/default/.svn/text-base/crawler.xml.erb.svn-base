@@ -1,0 +1,30 @@
+<system-context version="1.0">
+		<% @data.each do |key, val| %>
+        <<%=key%>><%=val%></<%=key%>>
+		<% end %>
+		
+        <system-config>
+            <% @sys_config.each do |key, val| %>
+			<<%=key%>><%=val%></<%=key%>>
+			<% end %>
+        </system-config>
+		
+        <!-- determines properties of system -->
+        <properties>
+				<% @properties.each do |key, val| %>
+                <property name="<%=key%>"><%=val%></property>
+				<% end %>
+        </properties>
+        <!-- list of crawlers will run on a crawler system -->
+        <bots>
+				<% @bots.each do |bot_name| %>
+				<property name="<%= bot_name %>">bots/<%= bot_name %>/context.xml</property>
+				<% end %>
+        </bots>
+        <!-- list subscribers are applied to all crawlers within this node -->
+        <subscribers>
+				<% @subscribers.each do |s| %>
+				<subscriber channel="<%= s['channel'] %>" protocol="tcp" system-name="<%= s['system-name'] %>" hostname="<%= s['hostname'] %>" port="<%= s['port'] %>" />
+				<% end %>
+        </subscribers>
+</system-context>

@@ -1,0 +1,26 @@
+<context version="1.0">
+        <provider>
+                <cdn-url>https://d77lg11wtf7h2.cloudfront.net/inv/<%= @name  %>/</cdn-url>
+				<% @provider.each do |key, val| %>
+				<% unless (val.is_a? Hash) %>
+				<<%= key %>><%=val%></<%= key %>>
+				<% end %>
+				<% end %>
+                <properties>
+                        <% @provider['properties'].each_pair do |pkey, pvalue| %>
+                        <property name="<%= pkey %>"><%=  pvalue %></property>
+                        <% end %>
+                </properties>
+        </provider>
+        <images>
+                <image type="thumb" width="260" height="180" />
+                <image type="small" width="57" height="57" />
+                <image type="big" width="270" height="270" />
+                <image type="select" width="57" height="57" />
+                <image type="original" />
+        </images>
+        <status><%= @status %></status>
+        <validate-sku><%= @validate_sku %></validate-sku>
+        <min-sku-number><%= @min_sku_number || 0 %></min-sku-number>
+        <delete-inv><%= @delete_inv || false %></delete-inv>
+</context>

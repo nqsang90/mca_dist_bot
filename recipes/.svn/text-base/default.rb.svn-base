@@ -1,0 +1,41 @@
+#
+# Cookbook Name:: mca_dist_bot
+# Recipe:: default
+#
+# Copyright 2014, YOUR_COMPANY_NAME
+#
+# All rights reserved - Do Not Redistribute
+#
+
+include_recipe "mca_dist_botexec"
+
+# deploy main bot source
+mca_release = search(:node, "mca_release:http_port").first
+tarpath = "#{Chef::Config[:file_cache_path]}/mca-bot-core-#{node['mca_dist_bot']['core']['version']}.tgz"
+
+remote_file tarpath do
+  source "http://#{mca_release['fqdn']}:#{mca_release['mca_release']['http_port']}/#{node['mca_dist_bot']['core']['package']}/#{node['mca_dist_bot']['core']['version']}.tgz"
+  mode 00644
+  action :create
+  checksum node['mca_dist_bot']['core']['checksum']
+  #notifies :run, "execute[untar-bot-core-archive]", :immediately
+end
+
+execute "untar-bot-core-archive" do
+  cwd node['mca_dist_botexec']['bot_dir']
+  command "rm -rf ./libs && /bin/tar xzf #{tarpath}"
+  not_if {File.exists?("#{node['mca_dist_botexec']['bot_dir']}/#{node['mca_dist_bot']['core']['check_deployed']}")}
+  user node['mca_dist_botexec']['user']
+  group node['mca_dist_botexec']['group']
+end
+
+%w{nodes bots log}.each do |dir|
+  directory "#{node['mca_dist_botexec']['bot_dir']}/#{dir}" do
+    recursive true
+    owner node['mca_dist_botexec']['user']
+    group node['mca_dist_botexec']['group']
+    mode 0775
+  end
+end
+
+

@@ -1,0 +1,56 @@
+#/bin/bash
+
+if [ $# -lt 2 ]; then
+	echo "Usage: $0 <NODE_NAME> {start|stop}"
+fi
+
+PRM_DIR=<%=@bot_dir%>
+NODE_DIR=$PRM_DIR/nodes
+
+cd $PRM_DIR
+
+NODE_NAME=$1
+
+mkdir -p nodes/.status
+PID_FILE=nodes/.status/$NODE_NAME.pid
+case $2 in
+	start)
+		if [ -s "$PID_FILE" ]; then
+			PID=`cat "$PID_FILE"`
+			ps -p $PID >/dev/null 2>&1
+			if [ $? = 0 ]; then
+					echo "Actor $NODE_NAME is already running with pid $PID"
+					exit 0
+			fi
+		fi
+		
+		export HADOOP_CLASSPATH=$HADOOP_CLASSPATH:$PRM_DIR/libs/*
+		<%=@hadoop_bin%> jar <%=@core_jar_file%> vn.mobivi.inventory.crawler.controller.NodeGenerator nodes/$NODE_NAME.xml 1>> $PRM_DIR/log/$NODE_NAME.log 2>>$PRM_DIR/log/$NODE_NAME.err &
+
+		PID=$!
+
+		echo $PID > "$PID_FILE"
+		echo "Actor $NODE_NAME has been started successfully."
+		exit 0
+		;;
+	stop)
+		if [ -f "$PID_FILE" ]; then
+			if [ -s "$PID_FILE" ]; then
+				PID=`cat "$PID_FILE"`
+				kill -TERM $PID
+				rm -f "$PID_FILE" >/dev/null 2>&1
+				echo "Actor $NODE_NAME stopped successfully."
+			fi
+		else
+			echo "PID file is not found. Failed to stop."
+		fi
+		exit 0
+		;;
+	restart)
+		$0 $NODE_NAME stop
+		if [ $? = 0 ]; then
+			$0 $NODE_NAME start
+		fi
+		;;
+esac
+
